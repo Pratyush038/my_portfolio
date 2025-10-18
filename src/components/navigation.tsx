@@ -16,11 +16,19 @@ const navigation = [
 export function Navigation() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isHydrated, setIsHydrated] = useState(false)
 
   useEffect(() => {
+    // Mark as hydrated after component mounts
+    setIsHydrated(true)
+
+    // Only access window after hydration
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
     }
+
+    // Set initial scroll state after hydration
+    handleScroll()
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)

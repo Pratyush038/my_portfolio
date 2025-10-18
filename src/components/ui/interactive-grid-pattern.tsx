@@ -37,6 +37,12 @@ export function InteractiveGridPattern({
 }: InteractiveGridPatternProps) {
   const [horizontal, vertical] = squares
   const [hoveredSquare, setHoveredSquare] = useState<number | null>(null)
+  const [isHydrated, setIsHydrated] = useState(false)
+
+  // Prevent hydration mismatch by only enabling interactivity after hydration
+  useEffect(() => {
+    setIsHydrated(true)
+  }, [])
 
   return (
     <svg
@@ -60,11 +66,13 @@ export function InteractiveGridPattern({
             height={height}
             className={cn(
               "stroke-gray-400/30 transition-all duration-100 ease-in-out [&:not(:hover)]:duration-1000",
-              hoveredSquare === index ? "fill-gray-300/30" : "fill-transparent",
+              hoveredSquare === index && isHydrated ? "fill-gray-300/30" : "fill-transparent",
               squaresClassName
             )}
-            onMouseEnter={() => setHoveredSquare(index)}
-            onMouseLeave={() => setHoveredSquare(null)}
+            {...(isHydrated && {
+              onMouseEnter: () => setHoveredSquare(index),
+              onMouseLeave: () => setHoveredSquare(null)
+            })}
           />
         )
       })}
