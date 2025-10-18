@@ -20,6 +20,13 @@ const eslintConfig = [
       "next-env.d.ts",
     ],
   },
+  {
+    rules: {
+      "react/no-unescaped-entities": "off",
+      // Suppress Tailwind CSS v4 at-rule warnings
+      "no-unknown-at-rules": "off",
+    },
+  },
 ];
 
 export default eslintConfig;
