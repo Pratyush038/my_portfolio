@@ -7,7 +7,6 @@ import { AboutSection } from "@/components/sections/about-section"
 import { ExperienceSection } from "@/components/sections/experience-section"
 import { ProjectsSection } from "@/components/sections/projects-section"
 import { ExtraCurricularsSection } from "@/components/sections/extra-curriculars-section"
-import { Footer } from "@/components/footer"
 import { motion, AnimatePresence } from "framer-motion"
 
 export default function Home() {
@@ -77,8 +76,6 @@ export default function Home() {
             <section id="extra-curriculars" className="scroll-mt-16">
               <ExtraCurricularsSection />
             </section>
-
-            <Footer />
           </motion.div>
         </AnimatePresence>
       </div>

@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useActiveSection } from '@/hooks/use-active-section'
+import Image from "next/image"
 
 const navigation = [
   { name: "Home", href: "#home", id: "home" },
@@ -94,8 +95,17 @@ export function Navigation() {
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
             >
-              <Link href="/" className="font-bold text-xl text-primary hover:text-primary/80 transition-colors">
-                Pratyush
+              <Link href="/" className="flex items-center space-x-2">
+                <Image
+                  src="/rvlogo.png"
+                  alt="RV Logo"
+                  width={32}
+                  height={32}
+                  className="transition-all duration-300 hover:brightness-110"
+                />
+                <span className="font-bold text-xl text-primary hover:text-primary/80 transition-colors">
+                  Pratyush
+                </span>
               </Link>
             </motion.div>
           </motion.div>

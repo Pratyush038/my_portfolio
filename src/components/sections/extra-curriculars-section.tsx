@@ -31,7 +31,7 @@ const activities = [
           href="https://www.chess.com/member/prats_3"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: 'red' }}
+          className="text-primary hover:text-primary/80 transition-colors"
         >
           chess.com
         </a>{' '}
@@ -40,7 +40,7 @@ const activities = [
           href="https://lichess.org/@/OfficiaLeo"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: 'red' }}
+          className="text-primary hover:text-primary/80 transition-colors"
         >
           lichess.org
         </a>.

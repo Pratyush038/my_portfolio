@@ -29,19 +29,24 @@ export interface DockProps extends React.HTMLAttributes<HTMLDivElement>, Variant
 const Dock = React.forwardRef<HTMLDivElement, DockProps>(({ children, className, direction, ...props }, ref) => {
   const mouseX = useMotionValue(Infinity)
   const mouseY = useMotionValue(Infinity)
+  const [hovered, setHovered] = useState(false)
 
   return (
     <motion.div
       ref={ref}
       className={cn(dockVariants({ direction }), className)}
+      onMouseEnter={() => setHovered(true)}
       onMouseMove={(e) => {
         mouseX.set(e.pageX)
         mouseY.set(e.pageY)
       }}
       onMouseLeave={() => {
+        setHovered(false)
         mouseX.set(Infinity)
         mouseY.set(Infinity)
       }}
+      animate={{ y: hovered ? -10 : 0, scale: hovered ? 1.04 : 1 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
       style={{
         ...props.style,
       }}

@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { motion } from "framer-motion"
+import { BorderBeam } from "@/components/ui/border-beam"
 
 const projects = [
   {
@@ -142,6 +143,7 @@ export function ProjectsSection() {
                 transition: { duration: 0.2 }
               }}
             >
+              <BorderBeam duration={8} size={100} />
               <div className="aspect-video relative bg-muted">
                 <Image
                   src={project.image}
@@ -158,7 +160,7 @@ export function ProjectsSection() {
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full"
+                      className="px-3 py-1 bg-primary/15 text-primary text-sm rounded-full dark:bg-primary/20"
                     >
                       {tech}
                     </span>

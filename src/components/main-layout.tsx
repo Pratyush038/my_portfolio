@@ -14,9 +14,9 @@ export function MainLayout({ children }: MainLayoutProps) {
         <InteractiveGridPattern
           width={30}
           height={30}
-          squares={[120, 120]}
-          className="w-full h-full opacity-20 dark:opacity-15"
-          squaresClassName="stroke-primary/20 dark:stroke-primary/25 transition-colors duration-700 ease-out"
+          squares={[218, 218]}
+          className="w-full h-full opacity-20 dark:opacity-40"
+          squaresClassName="stroke-primary/30 dark:stroke-primary/20 transition-colors duration-700 ease-out"
         />
       </div>
       <Navigation />

@@ -1,5 +1,6 @@
 import { Typewriter } from "@/components/typewriter"
 import { motion } from "framer-motion"
+import { BorderBeam } from "@/components/ui/border-beam"
 
 export function HeroSection() {
   const containerVariants = {
@@ -25,14 +26,21 @@ export function HeroSection() {
   }
 
   const buttonVariants = {
-    hover: {
-      scale: 1.05,
-      boxShadow: "0 0 25px rgba(var(--primary), 0.6)",
-      transition: {
-        duration: 0.3
-      }
+    initial: {
+      scale: 1
     },
-    tap: { scale: 0.95 }
+    hover: {
+      scale: 1.02
+    },
+    tap: { 
+      scale: 0.98 
+    }
+  }
+  
+  const buttonTransition = {
+    type: "spring" as const,
+    stiffness: 400,
+    damping: 25
   }
 
   return (
@@ -48,7 +56,7 @@ export function HeroSection() {
             className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent"
             variants={itemVariants}
           >
-            Hi, I'm{" "}
+            Hi! I'm{" "}
             <span className="text-primary">
               <Typewriter
                 sequence={[
@@ -81,81 +89,31 @@ export function HeroSection() {
           >
             <motion.a
               href="#projects"
-              className="inline-flex items-center justify-center rounded-md border border-input bg-background px-8 py-3 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring relative overflow-hidden"
+              className="inline-flex items-center justify-center rounded-md border border-border/60 bg-background/70 backdrop-blur-md px-8 py-3 text-sm font-medium shadow-lg hover:shadow-xl transition-all hover:bg-background/80 hover:border-primary/60 dark:border-border/80 dark:bg-background/60 dark:hover:bg-background/75 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring relative overflow-hidden"
               variants={buttonVariants}
+              initial="initial"
               whileHover="hover"
               whileTap="tap"
-              initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
+              transition={buttonTransition}
             >
-              <motion.span
-                className="relative"
-                whileHover={{
-                  textShadow: "0 0 8px rgba(var(--primary), 0.8)",
-                }}
-              >
-                View My Work
-              </motion.span>
-              {/* Gradient glow effect */}
-              <motion.div
-                className="absolute inset-0 rounded-md opacity-0 hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  background: `radial-gradient(circle at center,
-                    oklch(from var(--primary) calc(l + 0.15) c h) 0%,
-                    oklch(from var(--primary) calc(l + 0.08) c h) 30%,
-                    oklch(from var(--accent) calc(l + 0.05) c h) 60%,
-                    transparent 80%)`,
-                  filter: "blur(12px)",
-                  zIndex: -1,
-                }}
-                whileHover={{
-                  opacity: 0.7,
-                  scale: 1.15,
-                }}
-              />
+              <span className="relative z-20">View My Work</span>
+              <BorderBeam size={100} duration={8} />
             </motion.a>
             <motion.a
               href="https://drive.google.com/file/d/14Id8hKx7uu2xMpE6vaQ4_vWLsiCxLXli/view?usp=sharing"
-              className="inline-flex items-center justify-center rounded-md bg-primary px-8 py-3 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring relative overflow-hidden"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-md border border-primary/60 bg-primary/40 backdrop-blur-md px-8 py-3 text-sm font-medium shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all hover:bg-primary/50 hover:border-primary dark:bg-primary/35 dark:border-primary/70 dark:hover:bg-primary/45 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring relative overflow-hidden"
               variants={buttonVariants}
+              initial="initial"
               whileHover="hover"
               whileTap="tap"
-              initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.9, duration: 0.5 }}
+              transition={buttonTransition}
             >
-              <motion.span
-                className="relative z-10"
-                whileHover={{
-                  textShadow: "0 0 8px rgba(255, 255, 255, 0.8)",
-                }}
-              >
-                Download Resume
-              </motion.span>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary"
-                initial={{ scale: 0 }}
-                whileHover={{ scale: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-              {/* Enhanced gradient glow effect for primary button */}
-              <motion.div
-                className="absolute inset-0 rounded-md opacity-0 hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  background: `radial-gradient(circle at center,
-                    oklch(from var(--primary) calc(l + 0.2) c h) 0%,
-                    oklch(from var(--primary) calc(l + 0.12) c h) 25%,
-                    oklch(from var(--accent) calc(l + 0.08) c h) 50%,
-                    transparent 75%)`,
-                  filter: "blur(15px)",
-                  zIndex: -1,
-                }}
-                whileHover={{
-                  opacity: 0.8,
-                  scale: 1.2,
-                }}
-              />
+              <span className="relative z-20">Download Resume</span>
+              <BorderBeam size={100} duration={8} />
             </motion.a>
           </motion.div>
         </motion.div>
