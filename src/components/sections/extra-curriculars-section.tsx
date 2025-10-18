@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { BorderBeam } from "@/components/ui/border-beam"
 
 const activities = [
 
@@ -119,6 +120,7 @@ export function ExtraCurricularsSection() {
                 transition: { duration: 0.2 }
               }}
             >
+              <BorderBeam />
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
                 <h3 className="text-xl font-semibold text-primary">{activity.title}</h3>
                 <span className="text-sm text-muted-foreground mt-1 md:mt-0">

@@ -9,11 +9,15 @@ interface UseActiveSectionProps {
 
 export function useActiveSection({ sectionIds, offset = 100 }: UseActiveSectionProps) {
   const [activeSection, setActiveSection] = useState<string>("")
+  const [isHydrated, setIsHydrated] = useState(false)
 
   useEffect(() => {
-    if (typeof window === "undefined") return
+    // Mark as hydrated after component mounts
+    setIsHydrated(true)
 
     const handleScroll = () => {
+      if (typeof window === "undefined") return
+
       const scrollPosition = window.scrollY + offset
 
       // Find the section that is currently in view
@@ -39,11 +43,16 @@ export function useActiveSection({ sectionIds, offset = 100 }: UseActiveSectionP
       }
     }
 
-    // Set initial active section
-    handleScroll()
+    // Set initial active section after a brief delay to ensure DOM is ready
+    const timeoutId = setTimeout(() => {
+      handleScroll()
+    }, 0)
 
     window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => {
+      clearTimeout(timeoutId)
+      window.removeEventListener("scroll", handleScroll)
+    }
   }, [sectionIds, offset])
 
   return activeSection

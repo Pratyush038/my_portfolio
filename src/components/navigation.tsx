@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useActiveSection } from '@/hooks/use-active-section'
 import Image from "next/image"
+import { AuroraText } from '@/components/ui/aurora-text'
 
 const navigation = [
   { name: "Home", href: "#home", id: "home" },
@@ -75,7 +76,7 @@ export function Navigation() {
     <AnimatePresence>
       <motion.header
         className={`fixed top-0 z-50 w-full border-b transition-all duration-300 ${
-          isScrolled
+          isHydrated && isScrolled
             ? "bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60"
             : "bg-transparent border-transparent"
         }`}
@@ -96,16 +97,10 @@ export function Navigation() {
               transition={{ duration: 0.2 }}
             >
               <Link href="/" className="flex items-center space-x-2">
-                <Image
-                  src="/rvlogo.png"
-                  alt="RV Logo"
-                  width={32}
-                  height={32}
-                  className="transition-all duration-300 hover:brightness-110"
-                />
-                <span className="font-bold text-xl text-primary hover:text-primary/80 transition-colors">
+                
+                <AuroraText className="font-bold text-xl hover:text-primary/80 transition-colors">
                   Pratyush
-                </span>
+                </AuroraText>
               </Link>
             </motion.div>
           </motion.div>
@@ -114,7 +109,7 @@ export function Navigation() {
             className="hidden md:flex items-center space-x-6 text-sm font-medium"
             variants={containerVariants}
             initial="hidden"
-            animate="visible"
+            animate={isHydrated ? "visible" : "hidden"}
           >
             {navigation.map((item, index) => (
               <motion.div
@@ -172,7 +167,7 @@ export function Navigation() {
             className="flex items-center space-x-4"
             variants={itemVariants}
             initial="hidden"
-            animate="visible"
+            animate={isHydrated ? "visible" : "hidden"}
           >
           </motion.div>
         </div>
