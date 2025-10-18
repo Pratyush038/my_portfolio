@@ -9,11 +9,8 @@ interface UseActiveSectionProps {
 
 export function useActiveSection({ sectionIds, offset = 100 }: UseActiveSectionProps) {
   const [activeSection, setActiveSection] = useState<string>("")
-  const [isHydrated, setIsHydrated] = useState(false)
 
   useEffect(() => {
-    // Mark as hydrated after component mounts
-    setIsHydrated(true)
 
     const handleScroll = () => {
       if (typeof window === "undefined") return

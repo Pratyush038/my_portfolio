@@ -1,7 +1,7 @@
 "use client"
 
 import { cva, type VariantProps } from "class-variance-authority"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { motion, MotionValue, useMotionValue, useSpring, useTransform } from "framer-motion"
 import React, { useRef, useState } from "react"
 
 import { cn } from "@/lib/utils"
@@ -22,11 +22,13 @@ const dockVariants = cva(
   }
 )
 
-export interface DockProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof dockVariants> {
+export interface DockProps extends VariantProps<typeof dockVariants> {
   children: React.ReactNode
+  className?: string
+  style?: React.CSSProperties
 }
 
-const Dock = React.forwardRef<HTMLDivElement, DockProps>(({ children, className, direction, ...props }, ref) => {
+const Dock = React.forwardRef<HTMLDivElement, DockProps>(({ children, className, direction, style }, ref) => {
   const mouseX = useMotionValue(Infinity)
   const mouseY = useMotionValue(Infinity)
   const [hovered, setHovered] = useState(false)
@@ -47,10 +49,7 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(({ children, className,
       }}
       animate={{ y: hovered ? -10 : 0, scale: hovered ? 1.04 : 1 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
-      style={{
-        ...props.style,
-      }}
-      {...(props as any)}
+      style={style}
     >
       <DockContext.Provider value={{ mouseX, mouseY }}>
         {children}
@@ -61,7 +60,7 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(({ children, className,
 Dock.displayName = "Dock"
 
 // Create context for mouse position
-const DockContext = React.createContext<{ mouseX: any; mouseY: any } | null>(null)
+const DockContext = React.createContext<{ mouseX: MotionValue<number>; mouseY: MotionValue<number> } | null>(null)
 
 export interface DockIconProps {
   children: React.ReactNode
