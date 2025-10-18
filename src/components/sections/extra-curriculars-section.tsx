@@ -1,5 +1,7 @@
+import { motion } from "framer-motion"
+
 const activities = [
-  
+
   {
     title: "Cricketer",
     organization: "RVCE College Team",
@@ -54,20 +56,69 @@ const activities = [
 ]
 
 export function ExtraCurricularsSection() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.2
+      }
+    }
+  }
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6
+      }
+    }
+  }
+
   return (
     <section className="py-16 px-4">
       <div className="container mx-auto max-w-4xl">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">
+        <motion.h1
+          className="text-4xl md:text-5xl font-bold mb-4 text-center"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: false }}
+        >
           Extra <span className="text-primary">Curriculars</span>
-        </h1>
-        <p className="text-lg text-muted-foreground mb-12 text-center">
+        </motion.h1>
+        <motion.p
+          className="text-lg text-muted-foreground mb-12 text-center"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: false }}
+        >
           Beyond coding, I'm passionate about various activities that help me grow as a person
           and contribute to my community.
-        </p>
+        </motion.p>
 
-        <div className="space-y-8">
+        <motion.div
+          className="space-y-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false }}
+        >
           {activities.map((activity, index) => (
-            <div key={index} className="bg-card rounded-lg p-6 shadow-sm">
+            <motion.div
+              key={index}
+              className="bg-card rounded-lg p-6 shadow-sm relative group"
+              variants={cardVariants}
+              whileHover={{
+                scale: 1.02,
+                boxShadow: "0 8px 25px rgba(var(--primary), 0.1)",
+                transition: { duration: 0.2 }
+              }}
+            >
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
                 <h3 className="text-xl font-semibold text-primary">{activity.title}</h3>
                 <span className="text-sm text-muted-foreground mt-1 md:mt-0">
@@ -81,14 +132,37 @@ export function ExtraCurricularsSection() {
                 </span>
               </div>
 
-              <p className="text-muted-foreground">
+              <motion.p
+                className="text-muted-foreground"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: false }}
+              >
                 {activity.description}
-              </p>
-            </div>
-          ))}
-        </div>
+              </motion.p>
 
-        
+              {/* Card gradient glow */}
+              <motion.div
+                className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background: `radial-gradient(circle at center,
+                    oklch(from var(--primary) calc(l + 0.03) c h / 0.06) 0%,
+                    oklch(from var(--primary) calc(l + 0.015) c h / 0.03) 60%,
+                    transparent 85%)`,
+                  filter: "blur(22px)",
+                  zIndex: -1,
+                }}
+                whileHover={{
+                  opacity: 0.2,
+                  scale: 1.04,
+                }}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+
+
       </div>
     </section>
   )

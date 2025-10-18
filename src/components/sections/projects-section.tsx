@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { motion } from "framer-motion"
 
 const projects = [
   {
@@ -69,22 +70,77 @@ const projects = [
 
 
 export function ProjectsSection() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.1
+      }
+    }
+  }
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6
+      }
+    }
+  }
+
+  const linkVariants = {
+    hover: {
+      scale: 1.05,
+      textShadow: "0 0 8px rgba(var(--primary), 0.8)",
+      transition: {
+        duration: 0.2
+      }
+    }
+  }
+
   return (
     <section className="py-16 px-4">
       <div className="container mx-auto max-w-6xl">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">
+        <motion.h1
+          className="text-4xl md:text-5xl font-bold mb-4 text-center"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: false }}
+        >
           My <span className="text-primary">Projects</span>
-        </h1>
-        <p className="text-lg text-muted-foreground mb-12 text-center max-w-2xl mx-auto">
+        </motion.h1>
+        <motion.p
+          className="text-lg text-muted-foreground mb-12 text-center max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: false }}
+        >
           Here are some of the projects I've worked on. Each one represents a unique challenge
           and an opportunity to learn something new.
-        </p>
+        </motion.p>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <motion.div
+          className="grid md:grid-cols-2 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false }}
+        >
           {projects.map((project, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-card rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+              className="bg-card rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow group relative"
+              variants={cardVariants}
+              whileHover={{
+                y: -5,
+                transition: { duration: 0.2 }
+              }}
             >
               <div className="aspect-video relative bg-muted">
                 <Image
@@ -94,7 +150,7 @@ export function ProjectsSection() {
                   className="object-cover"
                 />
               </div>
-              <div className="p-6">
+              <div className="p-6 relative">
                 <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                 <p className="text-muted-foreground mb-4">{project.description}</p>
 
@@ -111,40 +167,111 @@ export function ProjectsSection() {
 
                 <div className="flex gap-4">
                   {project.github && (
-                    <a
-                    href={project.github}
-                    className="text-sm text-primary hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View Code →
-                  </a>
+                    <motion.a
+                      href={project.github}
+                      className="text-sm text-primary hover:underline relative"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variants={linkVariants}
+                      whileHover="hover"
+                    >
+                      View Code →
+                      {/* Gradient glow for link */}
+                      <motion.div
+                        className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300"
+                        style={{
+                          background: `radial-gradient(circle at center,
+                            oklch(from var(--primary) calc(l + 0.08) c h) 0%,
+                            oklch(from var(--primary) calc(l + 0.04) c h) 50%,
+                            transparent 80%)`,
+                          filter: "blur(6px)",
+                          zIndex: -1,
+                        }}
+                        whileHover={{
+                          opacity: 0.5,
+                          scale: 1.3,
+                        }}
+                      />
+                    </motion.a>
                   )}
                   {project.demo && (
-                    <a
+                    <motion.a
                       href={project.demo}
-                      className="text-sm text-primary hover:underline"
+                      className="text-sm text-primary hover:underline relative"
                       target="_blank"
                       rel="noopener noreferrer"
-                  >
-                    Live Demo →
-                  </a>
+                      variants={linkVariants}
+                      whileHover="hover"
+                    >
+                      Live Demo →
+                      {/* Gradient glow for link */}
+                      <motion.div
+                        className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300"
+                        style={{
+                          background: `radial-gradient(circle at center,
+                            oklch(from var(--primary) calc(l + 0.08) c h) 0%,
+                            oklch(from var(--primary) calc(l + 0.04) c h) 50%,
+                            transparent 80%)`,
+                          filter: "blur(6px)",
+                          zIndex: -1,
+                        }}
+                        whileHover={{
+                          opacity: 0.5,
+                          scale: 1.3,
+                        }}
+                      />
+                    </motion.a>
                   )}
                   {project.link && (
-                    <a
+                    <motion.a
                       href={project.link}
-                      className="text-sm text-primary hover:underline"
+                      className="text-sm text-primary hover:underline relative"
                       target="_blank"
                       rel="noopener noreferrer"
+                      variants={linkVariants}
+                      whileHover="hover"
                     >
                       Website →
-                    </a>
+                      {/* Gradient glow for link */}
+                      <motion.div
+                        className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300"
+                        style={{
+                          background: `radial-gradient(circle at center,
+                            oklch(from var(--primary) calc(l + 0.08) c h) 0%,
+                            oklch(from var(--primary) calc(l + 0.04) c h) 50%,
+                            transparent 80%)`,
+                          filter: "blur(6px)",
+                          zIndex: -1,
+                        }}
+                        whileHover={{
+                          opacity: 0.5,
+                          scale: 1.3,
+                        }}
+                      />
+                    </motion.a>
                   )}
                 </div>
               </div>
-            </div>
+
+              {/* Card gradient glow */}
+              <motion.div
+                className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background: `radial-gradient(circle at center,
+                    oklch(from var(--primary) calc(l + 0.05) c h / 0.1) 0%,
+                    oklch(from var(--primary) calc(l + 0.02) c h / 0.05) 40%,
+                    transparent 70%)`,
+                  filter: "blur(20px)",
+                  zIndex: -1,
+                }}
+                whileHover={{
+                  opacity: 0.3,
+                  scale: 1.05,
+                }}
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

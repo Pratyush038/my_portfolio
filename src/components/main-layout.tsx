@@ -1,5 +1,7 @@
 import { Navigation } from "@/components/navigation"
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern"
+import { motion, AnimatePresence } from "framer-motion"
+import { PortfolioDock } from "@/components/portfolio-dock"
 
 interface MainLayoutProps {
   children: React.ReactNode
@@ -18,9 +20,18 @@ export function MainLayout({ children }: MainLayoutProps) {
         />
       </div>
       <Navigation />
-      <main className="relative z-10">
-        {children}
-      </main>
+      <AnimatePresence mode="wait">
+        <motion.main
+          className="relative z-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          {children}
+        </motion.main>
+      </AnimatePresence>
+      <PortfolioDock />
     </div>
   )
 }
