@@ -134,6 +134,91 @@ section {
   animation: scroll-left 30s linear infinite;
 }
 
-.animate-scroll-right {
-  animation: scroll-right 25s linear infinite;
+/* Animated gradient border animations */
+@keyframes gradient-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient-border-reverse {
+  0% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-border {
+  position: relative;
+  background: linear-gradient(90deg,
+    oklch(from var(--primary) calc(l + 0.1) c h),
+    oklch(from var(--primary) calc(l + 0.05) c h),
+    oklch(from var(--primary) calc(l + 0.1) c h)
+  );
+  background-size: 200% 100%;
+  animation: gradient-border 3s ease-in-out infinite;
+  border-radius: inherit;
+}
+
+.animate-gradient-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(90deg,
+    oklch(from var(--primary) calc(l + 0.1) c h),
+    oklch(from var(--primary) calc(l + 0.05) c h),
+    oklch(from var(--primary) calc(l + 0.1) c h)
+  );
+  background-size: 200% 100%;
+  animation: gradient-border-reverse 3s ease-in-out infinite;
+  border-radius: inherit;
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0.7;
+}
+
+.animate-gradient-border-subtle {
+  position: relative;
+  background: linear-gradient(90deg,
+    oklch(from var(--primary) calc(l + 0.08) c h / 0.3),
+    oklch(from var(--primary) calc(l + 0.04) c h / 0.2),
+    oklch(from var(--primary) calc(l + 0.08) c h / 0.3)
+  );
+  background-size: 200% 100%;
+  animation: gradient-border 4s ease-in-out infinite;
+  border-radius: inherit;
+}
+
+.animate-gradient-border-subtle::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: linear-gradient(90deg,
+    oklch(from var(--primary) calc(l + 0.08) c h / 0.2),
+    oklch(from var(--primary) calc(l + 0.04) c h / 0.1),
+    oklch(from var(--primary) calc(l + 0.08) c h / 0.2)
+  );
+  background-size: 200% 100%;
+  animation: gradient-border-reverse 4s ease-in-out infinite;
+  border-radius: inherit;
+  z-index: -1;
+  filter: blur(6px);
+  opacity: 0.5;
 }

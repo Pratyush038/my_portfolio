@@ -1,20 +1,23 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useActiveSection } from '@/hooks/use-active-section'
 
 const navigation = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Experience", href: "#experience" },
-  { name: "Projects", href: "#projects" },
-  { name: "Extra Curriculars", href: "#extra-curriculars" },
+  { name: "Home", href: "#home", id: "home" },
+  { name: "About", href: "#about", id: "about" },
+  { name: "Experience", href: "#experience", id: "experience" },
+  { name: "Projects", href: "#projects", id: "projects" },
+  { name: "Extra Curriculars", href: "#extra-curriculars", id: "extra-curriculars" },
 ]
 
 export function Navigation() {
-  const pathname = usePathname()
+  const activeSection = useActiveSection({
+    sectionIds: navigation.map(item => item.id),
+    offset: 100
+  })
   const [isScrolled, setIsScrolled] = useState(false)
   const [isHydrated, setIsHydrated] = useState(false)
 
@@ -113,8 +116,8 @@ export function Navigation() {
                 <Link
                   href={item.href}
                   className={`relative px-3 py-2 rounded-md transition-all duration-300 ${
-                    pathname === item.href
-                      ? "text-foreground"
+                    activeSection === item.id
+                      ? "text-red-500 font-semibold"
                       : "text-muted-foreground hover:text-primary"
                   }`}
                 >
@@ -127,7 +130,7 @@ export function Navigation() {
                   >
                     {item.name}
                   </motion.span>
-                  {pathname === item.href && (
+                  {activeSection === item.id && (
                     <motion.div
                       className="absolute inset-0 bg-primary/10 rounded-md"
                       layoutId="activeSection"

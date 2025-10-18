@@ -2,19 +2,17 @@
 
 import React from "react"
 import Link from "next/link"
-import { Github, Linkedin, Mail, Home, Download, Sun, Moon } from "lucide-react"
 import { useTheme } from "next-themes"
-
-import { cn } from "@/lib/utils"
+import { Dock, DockIcon } from "../registry/magicui/dock"
 import { buttonVariants } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
+import { cn } from "@/lib/utils"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Dock, DockIcon } from "@/registry/magicui/dock"
+import { Github, Linkedin, Mail, Home, Download, Sun, Moon } from "lucide-react"
 
 export type IconProps = React.HTMLAttributes<SVGElement>
 
@@ -29,33 +27,13 @@ const Icons = {
 }
 
 const DATA = {
-  navbar: [
+  items: [
     { href: "#home", icon: Icons.home, label: "Home" },
+    { href: "https://github.com/Pratyush038", icon: Icons.github, label: "GitHub", external: true },
+    { href: "https://linkedin.com/in/pratyushbidare", icon: Icons.linkedin, label: "LinkedIn", external: true },
+    { href: "mailto:pratyush.bidare@gmail.com", icon: Icons.email, label: "Email" },
+    { href: "https://drive.google.com/file/d/14Id8hKx7uu2xMpE6vaQ4_vWLsiCxLXli/view?usp=sharing", icon: Icons.resume, label: "Resume", external: true },
   ],
-  contact: {
-    social: {
-      GitHub: {
-        name: "GitHub",
-        url: "https://github.com/Pratyush038",
-        icon: Icons.github,
-      },
-      LinkedIn: {
-        name: "LinkedIn",
-        url: "https://linkedin.com/in/pratyushbidare",
-        icon: Icons.linkedin,
-      },
-      email: {
-        name: "Email",
-        url: "mailto:pratyush.bidare@gmail.com",
-        icon: Icons.email,
-      },
-    },
-  },
-  resume: {
-    name: "Resume",
-    url: "https://drive.google.com/file/d/14Id8hKx7uu2xMpE6vaQ4_vWLsiCxLXli/view?usp=sharing",
-    icon: Icons.resume,
-  },
 }
 
 export function PortfolioDock() {
@@ -65,7 +43,7 @@ export function PortfolioDock() {
     <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50">
       <TooltipProvider>
         <Dock direction="middle">
-          {DATA.navbar.map((item) => (
+          {DATA.items.map((item) => (
             <DockIcon key={item.label}>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -76,6 +54,7 @@ export function PortfolioDock() {
                       buttonVariants({ variant: "ghost", size: "icon" }),
                       "size-12 rounded-full bg-background/90 backdrop-blur-sm border border-border/50 hover:bg-primary/10 hover:text-primary transition-all duration-300"
                     )}
+                    {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   >
                     <item.icon className="size-4" />
                   </Link>
@@ -86,57 +65,6 @@ export function PortfolioDock() {
               </Tooltip>
             </DockIcon>
           ))}
-
-          <Separator orientation="vertical" className="h-full bg-border/50" />
-
-          {Object.entries(DATA.contact.social).map(([name, social]) => (
-            <DockIcon key={name}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link
-                    href={social.url}
-                    aria-label={social.name}
-                    className={cn(
-                      buttonVariants({ variant: "ghost", size: "icon" }),
-                      "size-12 rounded-full bg-background/90 backdrop-blur-sm border border-border/50 hover:bg-primary/10 hover:text-primary transition-all duration-300"
-                    )}
-                    {...(social.url.startsWith('http') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  >
-                    <social.icon className="size-4" />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>{social.name}</p>
-                </TooltipContent>
-              </Tooltip>
-            </DockIcon>
-          ))}
-
-          <Separator orientation="vertical" className="h-full bg-border/50" />
-
-          <DockIcon>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href={DATA.resume.url}
-                  aria-label={DATA.resume.name}
-                  className={cn(
-                    buttonVariants({ variant: "ghost", size: "icon" }),
-                    "size-12 rounded-full bg-background/90 backdrop-blur-sm border border-border/50 hover:bg-primary/10 hover:text-primary transition-all duration-300"
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <DATA.resume.icon className="size-4" />
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{DATA.resume.name}</p>
-              </TooltipContent>
-            </Tooltip>
-          </DockIcon>
-
-          <Separator orientation="vertical" className="h-full bg-border/50" />
 
           <DockIcon>
             <Tooltip>

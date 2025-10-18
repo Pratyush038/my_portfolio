@@ -129,7 +129,7 @@ export function AboutSection() {
                   <p className="text-primary font-medium">B.E in Computer Science and Engineering - CGPA: 9.23</p>
                 </div>
               </div>
-              <p className="text-muted-foreground">Aug 2023 - Present</p>
+              <p className="text-muted-foreground">2023 - Present</p>
             </motion.div>
 
             <motion.div
@@ -304,7 +304,41 @@ export function AboutSection() {
                   <span className="font-semibold">MongoDB</span>
                 </div>
               </div>
-
+              {/* Duplicate set for seamless loop */}
+              <div className="flex items-center gap-8 flex-shrink-0">
+                <div className="flex items-center gap-2 text-2xl">
+                  <BarChart3 className="w-8 h-8 text-primary" />
+                  <span className="font-semibold">Pandas</span>
+                </div>
+                <div className="flex items-center gap-2 text-2xl">
+                  <Brain className="w-8 h-8 text-primary" />
+                  <span className="font-semibold">TensorFlow</span>
+                </div>
+                <div className="flex items-center gap-2 text-2xl">
+                  <Monitor className="w-8 h-8 text-primary" />
+                  <span className="font-semibold">Scikit-learn</span>
+                </div>
+                <div className="flex items-center gap-2 text-2xl">
+                  <Zap className="w-8 h-8 text-primary" />
+                  <span className="font-semibold">Streamlit</span>
+                </div>
+                <div className="flex items-center gap-2 text-2xl">
+                  <GitBranch className="w-8 h-8 text-primary" />
+                  <span className="font-semibold">Git</span>
+                </div>
+                <div className="flex items-center gap-2 text-2xl">
+                  <Zap className="w-8 h-8 text-primary" />
+                  <span className="font-semibold">JavaScript</span>
+                </div>
+                <div className="flex items-center gap-2 text-2xl">
+                  <Globe className="w-8 h-8 text-primary" />
+                  <span className="font-semibold">HTML</span>
+                </div>
+                <div className="flex items-center gap-2 text-2xl">
+                  <Database className="w-8 h-8 text-primary" />
+                  <span className="font-semibold">MongoDB</span>
+                </div>
+              </div>
               {/* Duplicate set for seamless loop */}
               <div className="flex items-center gap-8 flex-shrink-0">
                 <div className="flex items-center gap-2 text-2xl">
