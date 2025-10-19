@@ -60,7 +60,7 @@ export function HeroSection() {
             <span className="text-primary">
               <Typewriter
                 sequence={[
-                  "Pratyush",
+                  "Pratyush 👋",
                   1000,
                   "a Developer",
                   1000,
