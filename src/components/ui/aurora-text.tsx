@@ -1,6 +1,7 @@
 "use client"
 
 import React, { memo } from "react"
+import { useTheme } from "next-themes"
 
 interface AuroraTextProps {
   children: React.ReactNode
@@ -13,12 +14,20 @@ export const AuroraText = memo(
   ({
     children,
     className = "",
-    colors = ["#FF0080", "#7928CA", "#0070F3", "#38bdf8"],
+    colors,
     speed = 1,
   }: AuroraTextProps) => {
+    const { theme } = useTheme()
+
+    // Theme-aware default colors
+    const defaultColors = theme === "dark"
+      ? ["#DC2626", "#EF4444", "#F87171", "#FFFFFF"] // Red and white for dark theme
+      : ["#DC2626", "#EF4444", "#F87171", "#000000"] // Red and black for light theme
+
+    const gradientColors = colors || defaultColors
     const gradientStyle = {
-      backgroundImage: `linear-gradient(135deg, ${colors.join(", ")}, ${
-        colors[0]
+      backgroundImage: `linear-gradient(135deg, ${gradientColors.join(", ")}, ${
+        gradientColors[0]
       })`,
       WebkitBackgroundClip: "text",
       WebkitTextFillColor: "transparent",

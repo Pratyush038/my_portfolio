@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useActiveSection } from '@/hooks/use-active-section'
 import Image from "next/image"
 import { AuroraText } from '@/components/ui/aurora-text'
+import { useSound } from '@/hooks/use-sound'
 
 const navigation = [
   { name: "Home", href: "#home", id: "home" },
@@ -22,6 +23,7 @@ export function Navigation() {
   })
   const [isScrolled, setIsScrolled] = useState(false)
   const [isHydrated, setIsHydrated] = useState(false)
+  const { isMuted, toggleMute } = useSound()
 
   useEffect(() => {
     // Mark as hydrated after component mounts
@@ -169,6 +171,24 @@ export function Navigation() {
             initial="hidden"
             animate={isHydrated ? "visible" : "hidden"}
           >
+            <motion.button
+              onClick={toggleMute}
+              className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              title={isMuted ? "Unmute sounds" : "Mute sounds"}
+            >
+              {isMuted ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clipRule="evenodd" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                </svg>
+              )}
+            </motion.button>
           </motion.div>
         </div>
       </motion.header>
