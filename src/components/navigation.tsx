@@ -4,7 +4,6 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useActiveSection } from '@/hooks/use-active-section'
-import Image from "next/image"
 import { AuroraText } from '@/components/ui/aurora-text'
 import { useSound } from '@/hooks/use-sound'
 
@@ -113,7 +112,7 @@ export function Navigation() {
             initial="hidden"
             animate={isHydrated ? "visible" : "hidden"}
           >
-            {navigation.map((item, index) => (
+            {navigation.map((item) => (
               <motion.div
                 key={item.href}
                 variants={itemVariants}

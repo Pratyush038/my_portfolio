@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { motion } from "framer-motion"
 import {
   Code2,
@@ -5,14 +6,14 @@ import {
   GitBranch,
   Globe,
   Palette,
-  Server,
   Zap,
   Brain,
   BarChart3,
   Layers,
   Cpu,
   FileText,
-  Monitor
+  Monitor,
+  GraduationCap
 } from "lucide-react"
 
 export function AboutSection() {
@@ -68,9 +69,11 @@ export function AboutSection() {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
-              <img
+              <Image
                 src="/pfp.png"
                 alt="Profile Picture"
+                width={256}
+                height={256}
                 className="w-full h-full object-cover rounded-full"
               />
             </motion.div>
@@ -123,7 +126,7 @@ export function AboutSection() {
               whileHover={{ scale: 1.02 }}
             >
               <div className="flex items-center gap-4">
-                <img src="/rvlogo.png" alt="RV Logo" className="w-16 h-16" />
+                <GraduationCap className="w-16 h-16 text-primary" />
                 <div>
                   <h3 className="text-xl font-semibold">R.V College of Engineering</h3>
                   <p className="text-primary font-medium">B.E in Computer Science and Engineering - CGPA: 9.23</p>
@@ -141,7 +144,7 @@ export function AboutSection() {
               whileHover={{ scale: 1.02 }}
             >
               <div className="flex items-center gap-4">
-                <img src="/rvlogo.png" alt="RV Logo" className="w-16 h-16" />
+                <GraduationCap className="w-16 h-16 text-primary" />
                 <div>
                   <h3 className="text-xl font-semibold">RV PU College</h3>
                   <p className="text-primary font-medium">II PUC - 97.16%</p>
@@ -159,7 +162,7 @@ export function AboutSection() {
               whileHover={{ scale: 1.02 }}
             >
               <div className="flex items-center gap-4">
-                <img src="/kumaranslogo.png" alt="Kumarans Logo" className="w-16 h-16" />
+                <GraduationCap className="w-16 h-16 text-primary" />
                 <div>
                   <h3 className="text-xl font-semibold">Sri Kumaran Children's Home, Mallasandra</h3>
                   <p className="text-primary font-medium">10th CBSE - 95%</p>
