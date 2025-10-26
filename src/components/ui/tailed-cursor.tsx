@@ -46,15 +46,6 @@ function TailedCursorComponent({
     const container = containerRef.current;
     if (!container || !mounted) return;
 
-    // Check for WebGL support
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-    if (!gl) {
-      console.warn("WebGL not available, tailed cursor will not be displayed");
-      setHasWebGL(false);
-      return;
-    }
-
     // Dynamic import of OGL
     import('ogl').then(({ Color, Polyline, Renderer, Transform, Vec3 }) => {
       try {
