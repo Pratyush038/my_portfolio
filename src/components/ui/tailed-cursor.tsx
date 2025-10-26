@@ -54,7 +54,17 @@ function TailedCursorComponent({
       
       try {
         // Create a renderer with an alpha-enabled context
-        renderer = new Renderer({ dpr: window.devicePixelRatio || 2, alpha: true });
+        // Add specific settings for better Chrome compatibility
+        renderer = new Renderer({ 
+          dpr: window.devicePixelRatio || 2, 
+          alpha: true,
+          antialias: false,
+          depth: false,
+          stencil: false,
+          premultipliedAlpha: false,
+          preserveDrawingBuffer: false,
+          powerPreference: 'default'
+        });
         oglContext = renderer.gl;
         
         if (!oglContext || !renderer) {
