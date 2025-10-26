@@ -54,11 +54,11 @@ export function TailedCursor({
 
     // Create a renderer with an alpha-enabled context.
     let renderer: Renderer | null = null;
-    let gl: typeof Renderer.prototype.gl | null = null;
+    let gl: Renderer['gl'] | null = null;
     
     try {
       renderer = new Renderer({ dpr: window.devicePixelRatio || 2, alpha: true });
-      gl = renderer.gl as any; // OGL uses custom WebGL context type
+      gl = renderer.gl;
       
       if (!gl) {
         console.warn("WebGL not available, tailed cursor will not be displayed");
