@@ -13,7 +13,6 @@ import {
   Cpu,
   FileText,
   Monitor,
-  GraduationCap
 } from "lucide-react"
 
 export function AboutSection() {

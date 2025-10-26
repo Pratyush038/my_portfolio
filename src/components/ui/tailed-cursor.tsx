@@ -41,16 +41,16 @@ export function TailedCursor({
     setMounted(true);
   }, []);
 
-  // Determine cursor color based on theme
-  // Using the exact primary red color from globals.css
-  // Light mode: oklch(0.55 0.22 25) ≈ #dc2626 (red-600)
-  // Dark mode: oklch(0.65 0.25 25) ≈ #ef4444 (red-500)
-  const currentTheme = mounted ? (theme === "system" ? resolvedTheme : theme) : "dark";
-  const cursorColor = colors || (currentTheme === "light" ? ["#dc2626"] : ["#ffffff"]);
-
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+
+    // Determine cursor color based on theme
+    // Using the exact primary red color from globals.css
+    // Light mode: oklch(0.55 0.22 25) ≈ #dc2626 (red-600)
+    // Dark mode: oklch(0.65 0.25 25) ≈ #ef4444 (red-500)
+    const currentTheme = mounted ? (theme === "system" ? resolvedTheme : theme) : "dark";
+    const cursorColor = colors || (currentTheme === "light" ? ["#dc2626"] : ["#ffffff"]);
 
     // Create a renderer with an alpha-enabled context.
     const renderer = new Renderer({ dpr: window.devicePixelRatio || 2, alpha: true });
@@ -144,8 +144,7 @@ export function TailedCursor({
     }
     window.addEventListener("resize", resize);
 
-    const center = (cursorColor.length - 1) / 2;
-    cursorColor.forEach((color, index) => {
+    cursorColor.forEach((color) => {
       const spring = baseSpring;
       const friction = baseFriction;
       const thickness = baseThickness;
@@ -251,7 +250,10 @@ export function TailedCursor({
       }
     };
   }, [
-    cursorColor,
+    colors,
+    theme,
+    resolvedTheme,
+    mounted,
     baseSpring,
     baseFriction,
     baseThickness,
