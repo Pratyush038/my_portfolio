@@ -53,8 +53,22 @@ export function TailedCursor({
     const cursorColor = colors || (currentTheme === "light" ? ["#dc2626"] : ["#ffffff"]);
 
     // Create a renderer with an alpha-enabled context.
-    const renderer = new Renderer({ dpr: window.devicePixelRatio || 2, alpha: true });
-    const gl = renderer.gl;
+    let renderer: Renderer | null = null;
+    let gl: any = null;
+    
+    try {
+      renderer = new Renderer({ dpr: window.devicePixelRatio || 2, alpha: true });
+      gl = renderer.gl;
+      
+      if (!gl) {
+        console.warn("WebGL not available, tailed cursor will not be displayed");
+        return;
+      }
+    } catch (error) {
+      console.warn("Failed to create WebGL context for tailed cursor:", error);
+      return;
+    }
+    
     gl.clearColor(0, 0, 0, 0);
 
     gl.canvas.style.position = "absolute";
@@ -136,7 +150,7 @@ export function TailedCursor({
     `;
 
     function resize() {
-      if (!container) return;
+      if (!container || !renderer) return;
       const width = container.clientWidth;
       const height = container.clientHeight;
       renderer.setSize(width, height);
@@ -210,6 +224,7 @@ export function TailedCursor({
     let frameId: number;
     let lastTime = performance.now();
     function update() {
+      if (!renderer) return;
       frameId = requestAnimationFrame(update);
       const currentTime = performance.now();
       const dt = currentTime - lastTime;
@@ -245,7 +260,7 @@ export function TailedCursor({
       document.removeEventListener("touchstart", updateMouse);
       document.removeEventListener("touchmove", updateMouse);
       cancelAnimationFrame(frameId);
-      if (gl.canvas && container && gl.canvas.parentNode === container) {
+      if (gl && gl.canvas && container && gl.canvas.parentNode === container) {
         container.removeChild(gl.canvas);
       }
     };
