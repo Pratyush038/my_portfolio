@@ -48,24 +48,33 @@ function TailedCursorComponent({
 
     // Dynamic import of OGL
     import('ogl').then(({ Color, Polyline, Renderer, Transform, Vec3 }) => {
+      let renderer: InstanceType<typeof Renderer> | undefined;
+      let oglContext: InstanceType<typeof Renderer>['gl'] | undefined;
+      let canvasElement: HTMLCanvasElement | undefined;
+      
+      try {
+        // Create a renderer with an alpha-enabled context
+        renderer = new Renderer({ dpr: window.devicePixelRatio || 2, alpha: true });
+        oglContext = renderer.gl;
+        
+        if (!oglContext || !renderer) {
+          setHasWebGL(false);
+          return;
+        }
+      } catch (error) {
+        // WebGL not available - fail silently
+        setHasWebGL(false);
+        return;
+      }
+
       try {
         // Determine cursor color based on theme
         const currentTheme = theme === "system" ? resolvedTheme : theme;
         const cursorColor = colors || (currentTheme === "light" ? ["#dc2626"] : ["#ffffff"]);
 
-        // Create a renderer with an alpha-enabled context
-        const renderer = new Renderer({ dpr: window.devicePixelRatio || 2, alpha: true });
-        const oglContext = renderer.gl;
-        
-        if (!oglContext) {
-          console.warn("Failed to create OGL context");
-          setHasWebGL(false);
-          return;
-        }
-
         oglContext.clearColor(0, 0, 0, 0);
 
-        const canvasElement = oglContext.canvas as HTMLCanvasElement;
+        canvasElement = oglContext.canvas as HTMLCanvasElement;
         canvasElement.style.position = "absolute";
         canvasElement.style.top = "0";
         canvasElement.style.left = "0";
@@ -145,7 +154,7 @@ function TailedCursorComponent({
         `;
 
         function resize() {
-          if (!container) return;
+          if (!container || !renderer) return;
           const width = container.clientWidth;
           const height = container.clientHeight;
           renderer.setSize(width, height);
@@ -219,6 +228,7 @@ function TailedCursorComponent({
         let frameId: number;
         let lastTime = performance.now();
         function update() {
+          if (!renderer) return;
           frameId = requestAnimationFrame(update);
           const currentTime = performance.now();
           const dt = currentTime - lastTime;
@@ -260,11 +270,11 @@ function TailedCursorComponent({
           }
         };
       } catch (error) {
-        console.error("Error initializing tailed cursor:", error);
+        // Error during setup - clean up and fail silently
         setHasWebGL(false);
       }
-    }).catch((error) => {
-      console.error("Failed to load OGL library:", error);
+    }).catch(() => {
+      // Failed to load OGL library - fail silently
       setHasWebGL(false);
     });
   }, [
