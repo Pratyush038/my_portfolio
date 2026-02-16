@@ -32,7 +32,7 @@ const DATA = {
     { href: "https://github.com/Pratyush038", icon: Icons.github, label: "GitHub", external: true },
     { href: "https://linkedin.com/in/pratyushbidare", icon: Icons.linkedin, label: "LinkedIn", external: true },
     { href: "mailto:pratyush.bidare@gmail.com", icon: Icons.email, label: "Email" },
-    { href: "https://drive.google.com/file/d/14Id8hKx7uu2xMpE6vaQ4_vWLsiCxLXli/view?usp=sharing", icon: Icons.resume, label: "Resume", external: true },
+    { href: "https://drive.google.com/file/d/1-2zaaSaohKIoudQBTJj2kydKbA4OmaZu/view?usp=sharing", icon: Icons.resume, label: "Resume", external: true },
   ],
 }
 
