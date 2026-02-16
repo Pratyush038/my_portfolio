@@ -101,7 +101,7 @@ export function HeroSection() {
               <BorderBeam size={100} duration={8} />
             </motion.a>
             <motion.a
-              href="https://drive.google.com/file/d/14Id8hKx7uu2xMpE6vaQ4_vWLsiCxLXli/view?usp=sharing"
+              href="https://drive.google.com/file/d/1-2zaaSaohKIoudQBTJj2kydKbA4OmaZu/view?usp=sharing"
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-md border border-primary/60 bg-primary/40 backdrop-blur-md px-8 py-3 text-sm font-medium shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all hover:bg-primary/50 hover:border-primary dark:bg-primary/35 dark:border-primary/70 dark:hover:bg-primary/45 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring relative overflow-hidden"
