@@ -84,25 +84,19 @@ export function AboutSection() {
               className="text-lg text-muted-foreground"
               variants={itemVariants}
             >
-              Hi! I'm Pratyush, a third-year Computer Science and Engineering student at RV College of Engineering. I'm passionate about creating meaningful solutions that combine technology and creativity to address real-world problems.
+              Hi! I&apos;m Pratyush, a 4th-year CSE student at RVCE.
             </motion.p>
             <motion.p
               className="text-lg text-muted-foreground"
               variants={itemVariants}
             >
-              What I enjoy most is taking an idea and turning it into something useful and impactful, whether it's a data analytics platform, an IoT project, or a practical digital solution. I love exploring new technologies, understanding how they work and building products that are both functional and enjoyable to use.
+              I like building projects that scratch my own itch. Most of my work starts just because I ran into an issue and decided to code a solution for it. Depending on what I'm building, my work usually leans into AI, data analytics, or IoT.
             </motion.p>
             <motion.p
               className="text-lg text-muted-foreground"
               variants={itemVariants}
             >
-              Alongside my technical interests, I'm also fascinated by how business and economics influence innovation, from the way products create value to how technology drives growth and meaningful change.
-            </motion.p>
-            <motion.p
-              className="text-lg text-muted-foreground"
-              variants={itemVariants}
-            >
-              Over time, my curiosity for technology has grown into a genuine drive to build projects that make a difference. Every project I work on is an opportunity to learn, improve, and contribute to something meaningful and that ongoing process of learning is what keeps me motivated.
+              Outside of tech, cricket takes up most of my time. I play for RVCE and have played in KSCA inter-zonal tournaments. I also play the flute and enjoy a good game of chess.
             </motion.p>
           </div>
         </motion.div>
@@ -134,7 +128,7 @@ export function AboutSection() {
                 />
                 <div>
                   <h3 className="text-xl font-semibold">R.V College of Engineering</h3>
-                  <p className="text-primary font-medium">B.E in Computer Science and Engineering - CGPA: 9.23</p>
+                  <p className="text-primary font-medium">B.E in Computer Science and Engineering - CGPA: 9.14</p>
                 </div>
               </div>
               <p className="text-muted-foreground">2023 - Present</p>

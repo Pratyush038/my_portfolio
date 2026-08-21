@@ -2,6 +2,22 @@ import { motion } from "framer-motion"
 
 const experiences = [
   {
+    title: "Technology Program Intern",
+    company: "Wells Fargo",
+    period: "May 2026 - Jul 2026",
+    location: "Bangalore, India",
+    description: "Completed a 9-week Software Engineering Internship at Wells Fargo, contributing to enterprise-scale Generative AI solutions within the Global Payments & Liquidity Technology (GPLT) organisation under Commercial, Corporate & Investment Banking Technology (CCIBT).",
+    technologies: ["Python", "Git", "LLMs", "GenAI", "Prompt Engineering"],
+    achievements: [
+      "Enhanced a production GenAI-powered Wire Inquiries platform, contributing to a ~60% reduction in customer support Average Handling Time (25 min → 10 min) for wire payment investigations",
+      "Implemented model resiliency by integrating fallback LLMs, ensuring uninterrupted AI-powered responses during model outages and improving system reliability",
+      "Migrated enterprise GenAI services from the Tachyon API to the Tachyon SDK, modernizing AI integrations and improving maintainability",
+      "Optimized LLM prompts, reducing token consumption by 300–400 tokens per request while maintaining response quality and lowering inference costs",
+      "Developed production feature enhancements using Python, Git, and internal APIs within a large-scale enterprise codebase"
+    ],
+    logo: "/wellsfargologo.png"
+  },
+  {
     title: "Student Intern",
     company: "Bosch Rexroth India",
     period: "Aug 2024 - Sep 2024",
@@ -61,8 +77,7 @@ export function ExperienceSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: false }}
         >
-          My professional journey in software development, from internships to full-time roles,
-          showcasing my growth and contributions to various projects and teams.
+          My experience spans enterprise software engineering, production GenAI systems, and industrial automation.
         </motion.p>
 
         <motion.div

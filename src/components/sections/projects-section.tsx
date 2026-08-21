@@ -66,6 +66,27 @@ const projects = [
     technologies: ["Python", "Streamlit", "Qiskit", "Flask", "SQLite"],
     github: "https://github.com/Pratyush038/QuantumLock",
     link: "https://quantumlock.streamlit.app/"
+  },
+  {
+    title: "Trojan Analysis",
+    description: "An unsupervised graph anomaly detection framework for pre-silicon hardware Trojan detection using GraphSAGE and autoencoders on synthesized gate-level circuits",
+    image: "/trojan-analysis.png",
+    technologies: ["Python", "GraphSAGE", "PyTorch", "Yosys"],
+    github: "https://github.com/Pratyush038/TROJAN-ANALYSIS"
+  },
+  {
+    title: "BloodLink AI",
+    description: "A cloud-centric federated learning platform designed to improve blood inventory management and demand forecasting across decentralized blood banks while preserving patient privacy",
+    image: "/bloodlink-ai.png",
+    technologies: ["Python", "Federated Learning", "Bi-LSTM", "XGBoost"],
+    github: "https://github.com/Pratyush038/BloodLink-AI"
+  },
+  {
+    title: "MachInsight AI",
+    description: "A federated learning framework for predictive maintenance of industrial pumps and motors, estimating Remaining Useful Life (RUL) using Temporal Convolutional Networks and Differential Privacy",
+    image: "/machinsight-ai.png",
+    technologies: ["Python", "Federated Learning", "TCN", "PyTorch"],
+    github: "https://github.com/Pratyush038/MachInsight-AI"
   }
 ]
 
