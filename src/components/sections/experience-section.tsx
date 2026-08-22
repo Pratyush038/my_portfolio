@@ -118,23 +118,11 @@ export function ExperienceSection() {
                 </div>
               </div>
 
-              <motion.p
-                className="text-muted-foreground mb-4 leading-relaxed"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                viewport={{ once: false }}
-              >
+              <p className="text-muted-foreground mb-4 leading-relaxed">
                 {experience.description}
-              </motion.p>
+              </p>
 
-              <motion.div
-                className="mb-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                viewport={{ once: false }}
-              >
+              <div className="mb-4">
                 <h4 className="font-semibold mb-2 text-primary">Technologies Used:</h4>
                 <div className="flex flex-wrap gap-2">
                   {experience.technologies.map((tech) => (
@@ -146,31 +134,22 @@ export function ExperienceSection() {
                     </span>
                   ))}
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                viewport={{ once: false }}
-              >
+              <div>
                 <h4 className="font-semibold mb-2 text-primary">Key Achievements:</h4>
                 <ul className="space-y-1">
                   {experience.achievements.map((achievement, i) => (
-                    <motion.li
+                    <li
                       key={i}
                       className="text-sm text-muted-foreground flex items-start"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: i * 0.1 }}
-                      viewport={{ once: false }}
                     >
                       <span className="text-primary mr-2">•</span>
                       {achievement}
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
 
               {/* Card gradient glow */}
               <motion.div

@@ -1,5 +1,6 @@
 import Image from "next/image"
-import { motion } from "framer-motion"
+import { useState } from "react"
+import { motion, AnimatePresence, type Variants } from "framer-motion"
 import { BorderBeam } from "@/components/ui/border-beam"
 
 const projects = [
@@ -24,7 +25,7 @@ const projects = [
   {
     title: "ResQNet",
     description: "IoT-based Disaster Communication Network that establishes a resilient mesh topology for emergency communication when traditional infrastructure (cell towers, internet) fails",
-    image: "/resqnet.png",
+    image: "/disaster-net.png",
     technologies: ["React", "TypeScript", "Mapbox GL", "LoRa", "BLE"],
     github: "https://github.com/Pratyush038/DisasterNetworkSimulator"
   },
@@ -37,11 +38,11 @@ const projects = [
     link: "https://mab-prb.streamlit.app/"
   },
   {
-    title: "IoT-Based Smart Attendance System",
-    description: "IoT-based smart attendance system combining React, Firebase, and optional hardware integration for real-time facial recognition and sensor-driven tracking",
-    image: "/iot-attendance.png",
-    technologies: ["React", "Firebase", "Tailwind CSS"],
-    github: "https://github.com/Pratyush038/iot-smart-attendance"
+    title: "Compile-Time Dynamic Profiling",
+    description: "An LLVM 17 compiler pass that automatically instruments C/C++ programs with per-function call counters at compile time. Injects lightweight atomic counters into every function entry and prints a ranked profiling report when the program exits — no source-code changes required.",
+    image: "/llvm-profiler.png",
+    technologies: ["C++", "LLVM 17", "Clang", "Compiler Passes"],
+    github: "https://github.com/Pratyush038/LLVM"
   },
   {
     title: "FoodBridge AI",
@@ -52,12 +53,32 @@ const projects = [
     link: "https://food-bridge-ai.vercel.app/"
   },
   {
-    title: "HealthAlign",
-    description: "AI-driven health assistant that generates personalized 7-day meal and workout plans based on chronic health conditions",
-    image: "/healthalign.png",
-    technologies: ["Python", "Streamlit", "Qiskit", "Flask", "SQLite"],
-    github: "https://github.com/Pratyush038/ai_health_planner",
-    link: "https://aihealthplanner.streamlit.app/"
+    title: "Hardware Trojan Detection Framework",
+    description: "An unsupervised graph anomaly detection framework for pre-silicon hardware Trojan detection using GraphSAGE and autoencoders on synthesized gate-level circuits",
+    image: "/trojan-analysis.png",
+    technologies: ["Python", "GraphSAGE", "PyTorch", "Yosys"],
+    github: "https://github.com/Pratyush038/TROJAN-ANALYSIS"
+  },
+  {
+    title: "MachInsight AI",
+    description: "A federated learning framework for predictive maintenance of industrial pumps and motors, estimating Remaining Useful Life (RUL) using Temporal Convolutional Networks and Differential Privacy",
+    image: "/machinsight-ai.png",
+    technologies: ["Python", "Federated Learning", "TCN", "PyTorch"],
+    github: "https://github.com/Pratyush038/MachInsight-AI"
+  },
+  {
+    title: "BloodLink AI",
+    description: "A cloud-centric federated learning platform designed to improve blood inventory management and demand forecasting across decentralized blood banks while preserving patient privacy",
+    image: "/bloodlink-ai.png",
+    technologies: ["Python", "Federated Learning", "Bi-LSTM", "XGBoost"],
+    github: "https://github.com/Pratyush038/BloodLink-AI"
+  },
+  {
+    title: "IoT-Based Smart Attendance System",
+    description: "IoT-based smart attendance system combining React, Firebase, and optional hardware integration for real-time facial recognition and sensor-driven tracking",
+    image: "/iot-attendance.png",
+    technologies: ["React", "Firebase", "Tailwind CSS"],
+    github: "https://github.com/Pratyush038/iot-smart-attendance"
   },
   {
     title: "QuantumLock",
@@ -68,56 +89,49 @@ const projects = [
     link: "https://quantumlock.streamlit.app/"
   },
   {
-    title: "Trojan Analysis",
-    description: "An unsupervised graph anomaly detection framework for pre-silicon hardware Trojan detection using GraphSAGE and autoencoders on synthesized gate-level circuits",
-    image: "/trojan-analysis.png",
-    technologies: ["Python", "GraphSAGE", "PyTorch", "Yosys"],
-    github: "https://github.com/Pratyush038/TROJAN-ANALYSIS"
-  },
-  {
-    title: "BloodLink AI",
-    description: "A cloud-centric federated learning platform designed to improve blood inventory management and demand forecasting across decentralized blood banks while preserving patient privacy",
-    image: "/bloodlink-ai.png",
-    technologies: ["Python", "Federated Learning", "Bi-LSTM", "XGBoost"],
-    github: "https://github.com/Pratyush038/BloodLink-AI"
-  },
-  {
-    title: "MachInsight AI",
-    description: "A federated learning framework for predictive maintenance of industrial pumps and motors, estimating Remaining Useful Life (RUL) using Temporal Convolutional Networks and Differential Privacy",
-    image: "/machinsight-ai.png",
-    technologies: ["Python", "Federated Learning", "TCN", "PyTorch"],
-    github: "https://github.com/Pratyush038/MachInsight-AI"
+    title: "HealthAlign",
+    description: "AI-driven health assistant that generates personalized 7-day meal and workout plans based on chronic health conditions",
+    image: "/healthalign.png",
+    technologies: ["Python", "Streamlit", "Qiskit", "Flask", "SQLite"],
+    github: "https://github.com/Pratyush038/ai_health_planner",
+    link: "https://aihealthplanner.streamlit.app/"
   }
 ]
 
+const INITIAL_COUNT = 6
 
 export function ProjectsSection() {
-  const containerVariants = {
+  const [showAll, setShowAll] = useState(false)
+  const visibleProjects = showAll ? projects : projects.slice(0, INITIAL_COUNT)
+  const hiddenCount = projects.length - INITIAL_COUNT
+
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.6,
-        staggerChildren: 0.1
+        duration: 0.5,
+        staggerChildren: 0.08
       }
     }
   }
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6
+        duration: 0.5,
+        ease: "easeOut"
       }
     }
   }
 
-  const linkVariants = {
+  const linkVariants: Variants = {
     hover: {
-      scale: 1.05,
-      textShadow: "0 0 8px rgba(var(--primary), 0.8)",
+      scale: 1.04,
+      textShadow: "0 0 8px rgba(var(--primary), 0.7)",
       transition: {
         duration: 0.2
       }
@@ -132,7 +146,7 @@ export function ProjectsSection() {
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: false }}
+          viewport={{ once: true }}
         >
           My <span className="text-primary">Projects</span>
         </motion.h1>
@@ -140,161 +154,203 @@ export function ProjectsSection() {
           className="text-lg text-muted-foreground mb-12 text-center max-w-2xl mx-auto"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: false }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          viewport={{ once: true }}
         >
           Here are some of the projects I've worked on. Each one represents a unique challenge
           and an opportunity to learn something new.
         </motion.p>
 
         <motion.div
-          className="grid md:grid-cols-2 gap-8"
+          className="grid md:grid-cols-2 gap-8 items-stretch"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false }}
+          viewport={{ once: true, margin: "-40px" }}
         >
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              className="bg-card rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow group relative"
-              variants={cardVariants}
-              whileHover={{
-                y: -5,
-                transition: { duration: 0.2 }
-              }}
-            >
-              <BorderBeam duration={8} size={100} />
-              <div className="aspect-video relative bg-muted">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-6 relative">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-muted-foreground mb-4">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-primary/15 text-primary text-sm rounded-full dark:bg-primary/20"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex gap-4">
-                  {project.github && (
-                    <motion.a
-                      href={project.github}
-                      className="text-sm text-primary hover:underline relative"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      variants={linkVariants}
-                      whileHover="hover"
-                    >
-                      View Code →
-                      {/* Gradient glow for link */}
-                      <motion.div
-                        className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300"
-                        style={{
-                          background: `radial-gradient(circle at center,
-                            oklch(from var(--primary) calc(l + 0.08) c h) 0%,
-                            oklch(from var(--primary) calc(l + 0.04) c h) 50%,
-                            transparent 80%)`,
-                          filter: "blur(6px)",
-                          zIndex: -1,
-                        }}
-                        whileHover={{
-                          opacity: 0.5,
-                          scale: 1.3,
-                        }}
-                      />
-                    </motion.a>
-                  )}
-                  {project.demo && (
-                    <motion.a
-                      href={project.demo}
-                      className="text-sm text-primary hover:underline relative"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      variants={linkVariants}
-                      whileHover="hover"
-                    >
-                      Live Demo →
-                      {/* Gradient glow for link */}
-                      <motion.div
-                        className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300"
-                        style={{
-                          background: `radial-gradient(circle at center,
-                            oklch(from var(--primary) calc(l + 0.08) c h) 0%,
-                            oklch(from var(--primary) calc(l + 0.04) c h) 50%,
-                            transparent 80%)`,
-                          filter: "blur(6px)",
-                          zIndex: -1,
-                        }}
-                        whileHover={{
-                          opacity: 0.5,
-                          scale: 1.3,
-                        }}
-                      />
-                    </motion.a>
-                  )}
-                  {project.link && (
-                    <motion.a
-                      href={project.link}
-                      className="text-sm text-primary hover:underline relative"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      variants={linkVariants}
-                      whileHover="hover"
-                    >
-                      Website →
-                      {/* Gradient glow for link */}
-                      <motion.div
-                        className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300"
-                        style={{
-                          background: `radial-gradient(circle at center,
-                            oklch(from var(--primary) calc(l + 0.08) c h) 0%,
-                            oklch(from var(--primary) calc(l + 0.04) c h) 50%,
-                            transparent 80%)`,
-                          filter: "blur(6px)",
-                          zIndex: -1,
-                        }}
-                        whileHover={{
-                          opacity: 0.5,
-                          scale: 1.3,
-                        }}
-                      />
-                    </motion.a>
-                  )}
-                </div>
-              </div>
-
-              {/* Card gradient glow */}
+          <AnimatePresence mode="popLayout">
+            {visibleProjects.map((project, index) => (
               <motion.div
-                className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  background: `radial-gradient(circle at center,
-                    oklch(from var(--primary) calc(l + 0.05) c h / 0.1) 0%,
-                    oklch(from var(--primary) calc(l + 0.02) c h / 0.05) 40%,
-                    transparent 70%)`,
-                  filter: "blur(20px)",
-                  zIndex: -1,
+                key={project.title}
+                className="bg-card/90 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group relative border border-border/50 flex flex-col h-full backdrop-blur-sm"
+                variants={cardVariants}
+                layout
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.25 } }}
+                transition={{
+                  duration: 0.45,
+                  delay: index >= INITIAL_COUNT ? (index - INITIAL_COUNT) * 0.07 : 0,
+                  ease: "easeOut"
                 }}
                 whileHover={{
-                  opacity: 0.3,
-                  scale: 1.05,
+                  y: -6,
+                  transition: { duration: 0.25, ease: "easeOut" }
                 }}
-              />
-            </motion.div>
-          ))}
+              >
+                <BorderBeam duration={7} size={110} delay={index * 1.2} />
+
+                {/* Project Image */}
+                <div className="aspect-video relative bg-muted overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent pointer-events-none" />
+                </div>
+
+                {/* Project Content */}
+                <div className="p-6 flex flex-col flex-1 relative z-10">
+                  <h3 className="text-xl font-semibold mb-2.5 tracking-tight group-hover:text-primary transition-colors duration-200">
+                    {project.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
+                    {project.description}
+                  </p>
+
+                  {/* Technology Badges */}
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full border border-primary/20 dark:bg-primary/15 transition-colors"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Project Links Footer */}
+                  <div className="flex flex-wrap items-center gap-4 pt-4 mt-auto border-t border-border/40">
+                    {project.github && (
+                      <motion.a
+                        href={project.github}
+                        className="inline-flex items-center text-sm font-medium text-primary hover:underline relative group/link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variants={linkVariants}
+                        whileHover="hover"
+                      >
+                        <span>View Code</span>
+                        <span className="ml-1 transition-transform duration-200 group-hover/link:translate-x-0.5">→</span>
+                        <motion.div
+                          className="absolute inset-0 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 pointer-events-none"
+                          style={{
+                            background: `radial-gradient(circle at center,
+                              oklch(from var(--primary) calc(l + 0.08) c h) 0%,
+                              oklch(from var(--primary) calc(l + 0.04) c h) 50%,
+                              transparent 80%)`,
+                            filter: "blur(6px)",
+                            zIndex: -1,
+                          }}
+                          whileHover={{
+                            opacity: 0.5,
+                            scale: 1.3,
+                          }}
+                        />
+                      </motion.a>
+                    )}
+                    {project.demo && (
+                      <motion.a
+                        href={project.demo}
+                        className="inline-flex items-center text-sm font-medium text-primary hover:underline relative group/link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variants={linkVariants}
+                        whileHover="hover"
+                      >
+                        <span>Live Demo</span>
+                        <span className="ml-1 transition-transform duration-200 group-hover/link:translate-x-0.5">→</span>
+                        <motion.div
+                          className="absolute inset-0 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 pointer-events-none"
+                          style={{
+                            background: `radial-gradient(circle at center,
+                              oklch(from var(--primary) calc(l + 0.08) c h) 0%,
+                              oklch(from var(--primary) calc(l + 0.04) c h) 50%,
+                              transparent 80%)`,
+                            filter: "blur(6px)",
+                            zIndex: -1,
+                          }}
+                          whileHover={{
+                            opacity: 0.5,
+                            scale: 1.3,
+                          }}
+                        />
+                      </motion.a>
+                    )}
+                    {project.link && (
+                      <motion.a
+                        href={project.link}
+                        className="inline-flex items-center text-sm font-medium text-primary hover:underline relative group/link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variants={linkVariants}
+                        whileHover="hover"
+                      >
+                        <span>Website</span>
+                        <span className="ml-1 transition-transform duration-200 group-hover/link:translate-x-0.5">→</span>
+                        <motion.div
+                          className="absolute inset-0 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 pointer-events-none"
+                          style={{
+                            background: `radial-gradient(circle at center,
+                              oklch(from var(--primary) calc(l + 0.08) c h) 0%,
+                              oklch(from var(--primary) calc(l + 0.04) c h) 50%,
+                              transparent 80%)`,
+                            filter: "blur(6px)",
+                            zIndex: -1,
+                          }}
+                          whileHover={{
+                            opacity: 0.5,
+                            scale: 1.3,
+                          }}
+                        />
+                      </motion.a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Card gradient glow */}
+                <motion.div
+                  className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center,
+                      oklch(from var(--primary) calc(l + 0.05) c h / 0.12) 0%,
+                      oklch(from var(--primary) calc(l + 0.02) c h / 0.05) 40%,
+                      transparent 70%)`,
+                    filter: "blur(20px)",
+                    zIndex: -1,
+                  }}
+                  whileHover={{
+                    opacity: 0.35,
+                    scale: 1.05,
+                  }}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </motion.div>
+
+        {/* Show more / Show less button */}
+        {hiddenCount > 0 && (
+          <motion.div
+            className="flex justify-center mt-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <motion.button
+              onClick={() => setShowAll(!showAll)}
+              className="px-6 py-2.5 rounded-full border border-primary/40 bg-primary/5 hover:bg-primary/10 text-primary text-sm font-medium transition-colors backdrop-blur-sm shadow-sm hover:shadow-md"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              {showAll ? "Show less" : `Show ${hiddenCount} more`}
+            </motion.button>
+          </motion.div>
+        )}
       </div>
     </section>
   )

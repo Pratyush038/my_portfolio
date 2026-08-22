@@ -32,11 +32,11 @@ export function HeroSection() {
     hover: {
       scale: 1.02
     },
-    tap: { 
-      scale: 0.98 
+    tap: {
+      scale: 0.98
     }
   }
-  
+
   const buttonTransition = {
     type: "spring" as const,
     stiffness: 400,
@@ -60,14 +60,12 @@ export function HeroSection() {
             <span className="text-primary">
               <Typewriter
                 sequence={[
-                  "Pratyush 👋",
-                  1000,
+                  "Pratyush👋",
+                  1200,
                   "a Developer",
-                  1000,
-                  "a Designer",
-                  1000,
-                  "a Creator",
-                  1000,
+                  1200,
+                  "a Programmer",
+                  1200,
                 ]}
                 wrapper="span"
                 repeat={Infinity}
@@ -79,8 +77,9 @@ export function HeroSection() {
             className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
             variants={itemVariants}
           >
-            Welcome to my portfolio! I'm passionate about creating beautiful, functional,
-            and user-centered digital experiences. Explore my work and let's build something amazing together.
+            Welcome to my portfolio! I like building some cool stuff!
+            <br />
+            Check it out!
           </motion.p>
 
           <motion.div
@@ -102,7 +101,7 @@ export function HeroSection() {
             </motion.a>
             <motion.a
               href="https://drive.google.com/file/d/1mcat9m2pTc3a-5G0MrYyA1Ug2KoKyZdj/view?usp=sharing"
-              target="_blank" 
+              target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-md border border-primary/60 bg-primary/40 backdrop-blur-md px-8 py-3 text-sm font-medium shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all hover:bg-primary/50 hover:border-primary dark:bg-primary/35 dark:border-primary/70 dark:hover:bg-primary/45 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring relative overflow-hidden"
               variants={buttonVariants}

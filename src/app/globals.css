@@ -93,39 +93,36 @@
 }
 
 .dark {
-  --background: oklch(0.05 0 0); /* Very dark black */
+  --background: oklch(0.12 0.01 260); /* Deep slate-black */
   --foreground: oklch(0.95 0 0); /* Light text */
-  --card: oklch(0.08 0 0); /* Slightly lighter dark for cards */
+  --card: oklch(0.16 0.012 260); /* Modern sleek dark card */
   --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.08 0 0);
+  --popover: oklch(0.16 0.012 260);
   --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.65 0.25 25); /* Brighter red for dark mode */
-  --primary-foreground: oklch(0.05 0 0);
-  --secondary: oklch(0.15 0 0); /* Dark gray secondary */
+  --primary: oklch(0.55 0.22 25); /* Exact same red as light mode */
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.20 0.01 260); /* Muted secondary */
   --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.12 0 0); /* Muted dark */
-  --muted-foreground: oklch(0.7 0 0);
-  --accent: oklch(0.65 0.25 25); /* Brighter red accent */
-  --accent-foreground: oklch(0.05 0 0);
-  --destructive: oklch(0.65 0.25 25);
-  --border: oklch(0.2 0 0); /* Dark border */
-  --input: oklch(0.15 0 0); /* Dark input background */
-  --ring: oklch(0.65 0.25 25); /* Brighter red ring */
-}
-
-@layer base {
-  * {
-    border-color: oklch(var(--border));
-  }
-  body {
-    background-color: oklch(var(--background));
-    color: oklch(var(--foreground));
-  }
+  --muted: oklch(0.18 0.01 260); /* Clean muted tone */
+  --muted-foreground: oklch(0.65 0 0);
+  --accent: oklch(0.55 0.22 25); /* Exact same red as light mode */
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.55 0.22 25);
+  --border: oklch(0.24 0.01 260); /* Subtle border */
+  --input: oklch(0.20 0.01 260);
+  --ring: oklch(0.55 0.22 25);
 }
 
 /* Smooth scrolling for anchor links */
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 /* Scroll margin for sections to account for fixed header */
@@ -247,9 +244,11 @@ section {
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--border);
+    outline-color: color-mix(in oklch, var(--ring) 50%, transparent);
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--background);
+    color: var(--foreground);
   }
 }
